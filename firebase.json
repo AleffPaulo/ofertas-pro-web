@@ -23,6 +23,7 @@
     }
   ],
   "hosting": {
+    "site": "ofertas-pro-web",
     "public": "build",
     "ignore": [
       "firebase.json",
