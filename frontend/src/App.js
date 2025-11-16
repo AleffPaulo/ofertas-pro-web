@@ -12,8 +12,7 @@ import {
   MapPin, 
   Package, 
   Sparkles, 
-  X, 
-  ChevronDown 
+  X,
 } from 'lucide-react';
 import { initializeApp } from 'firebase/app';
 import { 
