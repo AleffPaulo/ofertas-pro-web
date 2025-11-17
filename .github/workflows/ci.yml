@@ -54,7 +54,16 @@ jobs:
       run: |
         cd functions
         npm test
-    
+# DEBUG: VER O QUE O CI ESTÁ LENDO
+    - name: Debugar Arquivos do Firebase
+      run: |
+        echo "========================================="
+        echo "Listando todos os arquivos no repositório..."
+        ls -aR
+        echo "========================================="
+        echo "Conteúdo do firebase.json que o CI está lendo:"
+        cat firebase.json
+        echo "========================================="    
 # DEPLOY
     - name: Deploy to Firebase
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'

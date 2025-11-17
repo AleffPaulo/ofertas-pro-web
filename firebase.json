@@ -21,7 +21,7 @@
   ],
   "hosting": {
     "site": "ofertas-pro-web",
-    "public": "build",
+    "public": "frontend/build",
     "ignore": [
       "firebase.json",
       "**/.*",
