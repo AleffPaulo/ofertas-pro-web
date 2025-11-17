@@ -55,9 +55,23 @@ jobs:
         cd functions
         npm test
     
-    # DEPLOY
+# DEPLOY
     - name: Deploy to Firebase
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      
+      # 1. Adiciona a chave da conta de serviço ao ambiente
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      
       run: |
+        # 2. Instala as ferramentas do Firebase
         npm install -g firebase-tools
-        firebase deploy --only hosting,functions,firestore:rules,storage:rules --token ${{ secrets.FIREBASE_TOKEN }}
+        
+        # 3. Cria o arquivo de credenciais a partir do Secret
+        echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > ./gcloud-service-key.json
+        
+        # 4. Informa ao Google para usar esse arquivo
+        export GOOGLE_APPLICATION_CREDENTIALS=./gcloud-service-key.json
+        
+        # 5. Roda o deploy SEM o --token, usando os alvos que você já tinha
+        firebase deploy --only hosting,functions,firestore:rules,storage:rules
